@@ -1,0 +1,35 @@
+// Replace 'YOUR_API_KEY' with your actual YouTube API key
+const apiKey = 'YOUR_API_KEY';
+
+// Replace 'YOUR_VIDEO_ID' with the unlisted YouTube video ID
+const videoId = 'YOUR_VIDEO_ID';
+
+let player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: videoId,
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    // You can add additional logic here if needed
+}
+
+// Load YouTube API script asynchronously
+(function() {
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(script, firstScriptTag);
+})();
